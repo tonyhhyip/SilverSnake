@@ -19,4 +19,6 @@ The API document of the SilverSnake.
 ##/doc
 The developer document of the SilverSnake.
 
+##/release
+Current using at the server.
 

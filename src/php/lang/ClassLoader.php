@@ -1,16 +1,21 @@
 <?php
 /**
  * @package phpLib
+ * package php.lang;
  */
 namespace \php\lang;
 
+/**
+ * @file
+ * The ClassLoader to autoloading the class.
+ */
 
 /**
  * Class autoloader.
  *
- * @package phpLib
- * @license http://www.gnu.org/copyleft/gpl.html GNU GENERAL PUBLIC LICENSE, Version 3
- * @version v0.0.2
+ * @package php.lang
+ * @license Apache License 2.0
+ * @version v0.0.3
  */
 class ClassLoader {
 	
@@ -35,26 +40,14 @@ class ClassLoader {
 	}
 	
 	/**
-	 * Regist the ClassLoader for autoload.
-	 */
-	public function regist() {
-		spl_autoload_register(array(__CLASS__, 'loadClass'));
-	}
-	
-	/**
-	 * Unregist the ClassLoader for autoload.
-	 */
-	public function unregist() {
-		spl_autoload_unregister(array(__CLASS__, 'loadClass'));
-	}
-	
-	/**
 	 * Define a source file of a class.
 	 * 
 	 * @param string $class The name of the class.
 	 * @param string $src The source file.
 	 */
 	public function defineClass($class, $src) {
+		if (substr($name, 0, 1) == "\\")
+			$class = substr($class, 0, 1);
 		$class = str_replace("\\", ".", $class);
 		$this->classes[$class] = $src;
 	}
@@ -65,6 +58,12 @@ class ClassLoader {
 	 * @param string $name The name of the class
 	 */
 	public function loadClass($name) {
+		if (function_exists("__autoload") {
+			__autoload($name);
+		}
+		if (substr($name, 0, 1) == "\\") {
+			$name = substr($name, 1);
+		}
 		$name = str_replace("\\", ".", $class);
 		if (isset($this->classes[$name])) {
 			$src = $this->classes[$name];
