@@ -25,4 +25,8 @@ require_once(dirname(__FILE__) . "/static.php");
 
 import("php.lang");
 
+spl_autoload_register(function ($class) {
+	$_ENV['classloader']->loadClass($class);
+});
+
 ?>
