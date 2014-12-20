@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @package \php\conf
+ * @package php\conf
  * package php.conf
  * @license Apache License 2.0
  */
 
-namespace \php\conf;
+namespace php\conf;
 
 class Properties {
 	
@@ -25,8 +25,8 @@ class Properties {
 	 * 
 	 * @param The defaults
 	 */
-	public function __construct(\php\conf\Properties $default = null) {
-		$this->defaults = $defaults;
+	public function __construct(Properties $default = null) {
+		$this->defaults = $default;
 	}
 	
 	/**
@@ -42,10 +42,14 @@ class Properties {
 	 * @return The value in this property list with specified key value.
 	 * @see Properties#setProperty(string, string)
 	 */
-	public function getProperty(string $key, string $defaultValue = null) {
+	public function getProperty($key, $defaultValue = null) {
+		if (!is_string($key) || (!is_string($defaultValue) && $defaultValue != null)) {
+			$key .= "";
+			$defaultValue .= "";
+		}
 		$val = $this->conf[$key];
 		if (!is_string($val) && $val != null) {
-			$val = $val . "";
+			$val .= "";
 		}
 		if ($val == null && $this->defaults != null) {
 			return $this->defaults->getProperty($key);
@@ -65,7 +69,7 @@ class Properties {
 	 * 			the value corresponding to key.
 	 * @see getProperty(string, string)
 	 */
-	public function setProperty(string $key, string $value) {
+	public function setProperty($key, $value) {
 		if (!is_string($key) || !is_string($value)) {
 			$key .= "";
 			$value .= "";
@@ -87,6 +91,7 @@ class Properties {
 		return array_keys($this->conf) +
 			($this->defaults == null ? array() : $this->defaults->propertyNames()); 
 	}
+	
 }
 
 ?>

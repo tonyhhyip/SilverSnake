@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @package \php\servlet
+ * @package php\servlet
  * package php.servlet;
  * @file Cookie access
  */ 
-
+namespace php\servlet;
 
 /**
  * Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server.

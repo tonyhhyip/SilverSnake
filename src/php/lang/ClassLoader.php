@@ -46,8 +46,6 @@ class ClassLoader {
 	 * @param string $src The source file.
 	 */
 	public function defineClass($class, $src) {
-		if (substr($class, 0, 1) == "\\")
-			$class = substr($class, 0, 1);
 		$class = str_replace("\\", ".", $class);
 		$this->classes[$class] = $src;
 	}
@@ -61,48 +59,11 @@ class ClassLoader {
 		if (function_exists("__autoload")) {
 			__autoload($name);
 		}
-		if (substr($name, 0, 1) == "\\") {
-			$name = substr($name, 1);
-		}
-		$name = str_replace("\\", ".", $class);
+		$name = str_replace("\\", ".", $name);
 		if (isset($this->classes[$name])) {
 			$src = $this->classes[$name];
-			foreach ($this->includePath as $path) {
-				if (file_exists('$path/$src')) {
-					include_once('$path/$src');
-					return;
-				}
-			}
+			include_once($src);
 		}
-	}
-	
-	/**
-	 * Add an include path of the source files.
-	 *  
-	 * @param string $path The include path.
-	 */
-	public function addIncludePath($path) {
-		if (array_search($path, $this->includePath) === false) {
-			array_push($this->includePath, $path);
-		}
-	}
-	
-	/**
-	 * Add an includePath of the source files.
-	 * 
-	 * @parm string $path The include path.
-	 */
-	public function removeIncludePath($path) {
-		$this->includePath = array_diff($this->includePath, array($path));
-	}
-	
-	/**
-	 * Get all the include path.
-	 * 
-	 * @return string[] All the include path. 
-	 */
-	public function getIncludePath() {
-		return clone $this->includePath;
 	}
 }
 ?>

@@ -18,7 +18,7 @@ define('SILVERSNAKE_MIMIMUM_PHP', '5.2.4');
 
 function import($package) {
 	$path = str_replace("\\", "/", $package);
-	$path = preg_replace(".", "/", $path);
+	$path = str_replace(".", "/", $path);
 	$path = SilverSnake . "/$path";
 	$files = scandir($path);
 	$files = array_diff($files, array(".", ".."));

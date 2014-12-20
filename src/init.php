@@ -17,7 +17,6 @@ array_shift($files);
 
 array_shift($files);
 
-$default['classloader']->addIncludePath(dirname(__FILE__));
 
 $_ENV = $_ENV + $default;
 
