@@ -46,7 +46,7 @@ class ClassLoader {
 	 * @param string $src The source file.
 	 */
 	public function defineClass($class, $src) {
-		if (substr($name, 0, 1) == "\\")
+		if (substr($class, 0, 1) == "\\")
 			$class = substr($class, 0, 1);
 		$class = str_replace("\\", ".", $class);
 		$this->classes[$class] = $src;
