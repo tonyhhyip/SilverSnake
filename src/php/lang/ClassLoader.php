@@ -1,9 +1,9 @@
 <?php
 /**
- * @package phpLib
+ * @package \php\lang
  * package php.lang;
  */
-namespace \php\lang;
+namespace php\lang;
 
 /**
  * @file
