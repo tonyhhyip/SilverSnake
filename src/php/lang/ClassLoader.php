@@ -58,7 +58,7 @@ class ClassLoader {
 	 * @param string $name The name of the class
 	 */
 	public function loadClass($name) {
-		if (function_exists("__autoload") {
+		if (function_exists("__autoload")) {
 			__autoload($name);
 		}
 		if (substr($name, 0, 1) == "\\") {
