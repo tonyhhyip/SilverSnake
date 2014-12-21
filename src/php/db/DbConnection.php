@@ -16,7 +16,7 @@ namespace php\db;
  *
  * @see http://php.net/manual/book.pdo.php
  */
-abstract class DbConnection extends PDO {
+abstract class DbConnection extends \PDO {
 	/**
 	 * The database target this connection is for.
 	 *
@@ -45,13 +45,6 @@ abstract class DbConnection extends PDO {
 	protected $logger = null;
 	
 	/**
-	 * The current database logging object for this connection.
-	 *
-	 * @var DatabaseLog
-	 */
-	protected $logger = NULL;
-	
-	/**
 	 * Tracks the number of "layers" of transactions currently active.
 	 *
 	 * On many databases transactions cannot nest.  Instead, we track
@@ -74,7 +67,7 @@ abstract class DbConnection extends PDO {
 	 *
 	 * @var string
 	*/
-	protected $statementClass = 'DatabaseStatementBase';
+	protected $statementClass = '\\php\\db\\DatabaseStatement';
 	
 	/**
 	 * Whether this database connection supports transactions.
@@ -140,12 +133,12 @@ abstract class DbConnection extends PDO {
 		$this->setPrefix(isset($this->connectionOptions['prefix']) ? $this->connectionOptions['prefix'] : '');
 		
 		// Because the other methods don't seem to work right.
-		$options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$options[\PDO::ATTR_ERRMODE] = \PDO::ERRMODE_EXCEPTION;
 		
 		parent::__construct($dsn, $username, $passwd, $options);
 		
 		if (!empty($this->statementClass)) {
-			$this->setAttribute(PDO::ATTR_STATEMENT_CLASS, array($this->statementClass, array($this)));
+			$this->setAttribute(\PDO::ATTR_STATEMENT_CLASS, array($this->statementClass, array($this)));
 		}
 	}
 	

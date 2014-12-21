@@ -368,17 +368,17 @@ abstract class Database {
 		// If the requested database does not exist then it is an unrecoverable
 		// error.
 		if (!isset(self::$databaseInfo[$key])) {
-			throw new DatabaseConnectionNotDefinedException('The specified database connection is not defined: ' . $key);
+			throw new DatabaseConnectionException('The specified database connection is not defined: ' . $key);
 		}
 
 		if (!$driver = self::$databaseInfo[$key][$target]['driver']) {
-			throw new DatabaseDriverNotSpecifiedException('Driver not specified for this database connection: ' . $key);
+			throw new DatabaseConnectionException('Driver not specified for this database connection: ' . $key);
 		}
 
 		// We cannot rely on the registry yet, because the registry requires an
 		// open database connection.
-		$driver_class = 'DatabaseConnection_' . $driver;
-		require_once DRUPAL_ROOT . '/includes/database/' . $driver . '/database.inc';
+		$driver_class = ucfirst($driver) . 'DbConnection';
+		import('php.db.' . strtolower($driver));
 		$new_connection = new $driver_class(self::$databaseInfo[$key][$target]);
 		$new_connection->setTarget($target);
 		$new_connection->setKey($key);
