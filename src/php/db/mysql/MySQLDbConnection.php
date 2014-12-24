@@ -8,6 +8,7 @@
 
 namespace php\db\mysql;
 
+use php\db\SQLException;
 /**
  * Database interface code for MySQL database servers.
  */
@@ -154,7 +155,7 @@ class MySQLDbConnection extends \php\db\DbConnection {
 			$max_id = $this->query('SELECT MAX(value) FROM {sequences}')->fetchField();
 			// We know we are using MySQL here, no need for the slower db_delete().
 			$this->query('DELETE FROM {sequences} WHERE value < :value', array(':value' => $max_id));
-		} catch (PDOException $e) {
+		} catch (\PDOException $e) {
 		// During testing, this function is called from shutdown with the
 		// simpletest prefix stored in $this->connection, and those tables are gone
 		// by the time shutdown is called so we need to ignore the database
@@ -162,6 +163,44 @@ class MySQLDbConnection extends \php\db\DbConnection {
 		// these queries fail, the sequence will work just fine, just use a bit
 		// more database storage and memory.
 		
+		}
+	}
+	
+	/**
+	 * Overridden to work around issues to MySQL not supporting transactional DDL.
+	 */
+	protected function popCommittableTransactions() {
+		// Commit all the commitable layers.
+		foreach (array_reverse($this->transactionLayers) as $key => $active) {
+			
+			// Stop once we found an active transaction.
+			if ($active) {
+				break;
+			}
+			
+			// If there are no more layers left then we should commit.
+			unset($this->transactionLayers[$name]);
+			if (empty($this->transactionLayers)) {
+				if (\PDO::commit()) {
+					throw new SQLException();
+				}
+			} else {
+				// Attempt to release this savepoint in the standard way.
+				try {
+					$this->query('RELEASE SAVEPOINT ' . $name);
+				} catch (\PDOException $e) {
+					if ($e->errorInfo[1] == '1305') {
+						// If one SAVEPOINT was released automatically, then all were.
+						// Therefore, clean the transaction stack.
+						$this->transactionLayers = array();
+						// We also have to explain to PDO that the transaction stack has
+						// been cleaned-up.
+						\PDO::commit();
+					} else {
+						throw new SQLException("Fail to rollback in \\php\\db\\mysql\\MySQLDbConnection::popCommitableTransaction", $e);
+					}
+				}
+			}
 		}
 	}
 }

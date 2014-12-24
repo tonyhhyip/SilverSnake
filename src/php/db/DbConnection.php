@@ -1074,4 +1074,8 @@ abstract class DbConnection extends \PDO {
 	  *   also larger than the $existing_id if one was passed in.
 	  */
 	 abstract public function nextId($existing_id = 0);
+	 
+	 public function getTarget() {
+	 	return $this->target;
+	 }
 }
