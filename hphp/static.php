@@ -9,14 +9,10 @@
 /**
  * Path to SilverSnake
  */
-define('SilverSnake', dirname(__FILE__));
+define('SilverSnake', __DIR__);
 
-/**
- * Minimum supported version of PHP
- */
-define('SILVERSNAKE_MIMIMUM_PHP', '5.2.4');
 
-function import($package) {
+function import(string $package):void {
 	$path = str_replace("\\", "/", $package);
 	$path = str_replace(".", "/", $path);
 	$path = SilverSnake . "/$path";
