@@ -9,13 +9,17 @@
 /**
  * Path to SilverSnake
  */
-define('SilverSnake', dirname(__FILE__));
+define('SilverSnake', __DIR__);
 
 /**
  * Minimum supported version of PHP
  */
 define('SILVERSNAKE_MIMIMUM_PHP', '5.3.0');
 
+/**
+ * Load the package into the default ClassLoader and execute the static and init script.
+ * @param string $package
+ */
 function import($package) {
 	$path = str_replace("\\", "/", $package);
 	$path = str_replace(".", "/", $path);
@@ -32,4 +36,14 @@ function import($package) {
 	if (file_exists('$path/init.php'))
 		include_once('$path/init.php');
 }
+
+/**
+ * Print a line with a new line(\n) at the end.
+ * @param string $str String to output.
+ */
+function println(string $str) {
+	print($str);
+	print "\n";
+}
+
 ?>

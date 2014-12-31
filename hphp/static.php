@@ -11,7 +11,10 @@
  */
 define('SilverSnake', __DIR__);
 
-
+/**
+ * Load the package into the default ClassLoader and execute the static and init script.
+ * @param string $package
+ */
 function import(string $package):void {
 	$path = str_replace("\\", "/", $package);
 	$path = str_replace(".", "/", $path);
@@ -28,4 +31,12 @@ function import(string $package):void {
 	if (file_exists('$path/init.php'))
 		include_once('$path/init.php');
 }
-?>
+
+/**
+ * Print a line with a new line(\n) at the end.
+ * @param string $str String to output.
+ */
+function println(string $str):void {
+	print($str);
+	print "\n";
+}

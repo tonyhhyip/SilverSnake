@@ -20,7 +20,7 @@ namespace php\lang;
 class ClassLoader {
 	
 	protected $parent;
-	protected $classes = array();
+	protected $classes = Map{};
 	
 	/**
 	 * Create a new ClassLoader.
@@ -41,7 +41,7 @@ class ClassLoader {
 	 * @param string $class The name of the class.
 	 * @param string $src The source file.
 	 */
-	public function defineClass($class, $src) {
+	public function defineClass(string $class, string $src):void {
 		if (preg_match("/init|static/i", $class) || array_key_exists($class, $this->classes))
 			return ;
 		$class = str_replace("\\", ".", $class);
@@ -53,8 +53,8 @@ class ClassLoader {
 	 * 
 	 * @param string $name The name of the class
 	 */
-	public function loadClass($name) {
-		if (function_exists("__autoload")) {
+	public function loadClass(string $name) {
+		if ($this->parent) {
 			__autoload($name);
 		}
 		$name = str_replace("\\", ".", $name);
@@ -64,4 +64,3 @@ class ClassLoader {
 		}
 	}
 }
-?>
