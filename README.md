@@ -12,6 +12,7 @@ To install the library, please refer to INSTALL
 
 ##/php
 All the PHP version code are in this dirctory.
+
 [PHP](http://php.net/)
 
 ##/api
@@ -23,6 +24,3 @@ The developer document of the SilverSnake.
 ##/release
 Current using at the server.
 
-##/hphp
-All the Hacklang version code are in this directory.
-[HHVM](http://hacklang.org/)
