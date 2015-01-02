@@ -63,5 +63,15 @@ class ClassLoader {
 			include_once($src);
 		}
 	}
+	
+	/**
+	 * Remove the class defined
+	 * 
+	 * @param string $name The name of the Class 
+	 */
+	public function removeClass($name) {
+		$name = str_replace("\\", ".", $name);
+		unset($this->classes[$name]);
+	}
 }
 ?>

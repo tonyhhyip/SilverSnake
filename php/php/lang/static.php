@@ -4,7 +4,7 @@
  * @package \php\lang
  * @file static function and constants of the package.
  */
-
+use \php\lang;
 /**
  * Print a line with a new line(\n) at the end.
  * @param string $str String to output.
