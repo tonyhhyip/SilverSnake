@@ -247,6 +247,31 @@ class InsertQuery extends \php\db\Query {
 	 *
 	 * @throws SQLException
 	 */
+	public function preExecute() {
+		// Confirm that the user did not try to specify an identical
+		// field and default field.
+		if (array_intersect($this->insertFields, $this->defaultFields)) {
+			throw new SQLException('You may not specify the same field to have a value and a schema-default value.');
+		}
+		if (!empty($this->fromQuery)) {
+			// We have to assume that the used aliases match the insert fields.
+			// Regular fields are added to the query before expressions, maintain the
+			// same order for the insert fields.
+			// This behavior can be overridden by calling fields() manually as only the
+			// first call to fields() does have an effect.
+			$this->fields(array_merge(array_keys($this->fromQuery->getFields()), array_keys($this->fromQuery->getExpressions())));
+		} else {
+			// Don't execute query without fields.
+			if (count($this->insertFields) + count($this->defaultFields) == 0) {
+				throw new SQLException('There are no fields available to insert with.');
+			}
+		}
+		
+		// If no values have been added, silently ignore this query. This can happen
+		// if values are added conditionally, so we don't want to throw an
+		// exception.
+		return isset($this->insertValues[0]) && count($this->insertFields) <= 0 && !empty($this->fromQuery);
+	}
 }
 
 ?>

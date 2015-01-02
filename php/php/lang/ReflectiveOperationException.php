@@ -32,7 +32,7 @@ class ReflectiveOperationException extends \php\lang\Exception {
 	 *         permitted, and indicates that the cause is nonexistent or
 	 *         unknown.)
 	 */
-	public function __construct($message = "", $cause = null) {
+	public function __construct($message = "", \php\lang\Exception $cause = null) {
 		parent($message, $cause);
 	}
 }

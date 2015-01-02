@@ -62,6 +62,9 @@ class ClassLoader {
 			$src = $this->classes[$name];
 			include_once($src);
 		}
+		if (!class_exists($name)) {
+			throw new ClassNotFoundException("Fail to load the class: $name");
+		}
 	}
 	
 	/**
