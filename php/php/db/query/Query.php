@@ -5,7 +5,7 @@
  * package php.db;
  */
 
-namespace php\db;
+namespace php\db\query;
 
 /**
  * Base class for query builders.
@@ -70,7 +70,7 @@ abstract class Query implements QueryPlaceholder {
 	 * @param array $options
 	 *   Array of query options.
 	 */
-	public function __construct(DbConnection $connection, $options) {
+	public function __construct(\php\db\DbConnection $connection, $options) {
 		$this->uniqueIdentifier = uniqid('', true);
 		
 		$this->connection = $connection;

@@ -5,12 +5,12 @@
  * package php.db;
  */
 
-namespace php\db;
+namespace php\db\query;
 
 /**
  * General class for an abstracted INSERT query.
  */
-class InsertQuery extends \php\db\Query {
+class InsertQuery extends Query {
 	/**
 	 * The table on which to insert.
 	 *
@@ -66,7 +66,7 @@ class InsertQuery extends \php\db\Query {
 	 * @param array $options
 	 *   Array of database options.
 	 */
-	public function __construct(DbConnection $connection, $table, array $options = array()) {
+	public function __construct(\php\db\DbConnection $connection, $table, array $options = array()) {
 		if (!isset($options['return'])) {
       		$options['return'] = Database::RETURN_INSERT_ID;
     	}

@@ -67,7 +67,7 @@ abstract class DbConnection extends \PDO {
 	 *
 	 * @var string
 	*/
-	protected $statementClass = '\\php\\db\\DatabaseStatement';
+	protected $statementClass = '\\php\\db\\query\\DatabaseStatement';
 	
 	/**
 	 * Whether this database connection supports transactions.

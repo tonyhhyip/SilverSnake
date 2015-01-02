@@ -5,7 +5,7 @@
  * package php.db;
  */
 
-namespace php\db;
+namespace php\db\query;
 
 /**
  * Represents a prepared statement.

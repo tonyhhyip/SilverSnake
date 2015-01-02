@@ -4,7 +4,7 @@
  * @package php\db
  * package php.db;
  */
-namespace php\db;
+namespace php\db\query;
 
 /**
  * Interface for a query that accepts placeholders.

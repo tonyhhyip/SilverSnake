@@ -3,7 +3,7 @@
  * @package php\db
  * package php.db;
  */
-namespace php\db;
+namespace php\db\query;
 
 /**
  * Interface for a conditional clause in a query.
@@ -142,7 +142,7 @@ interface QueryConditionInterface {
 	 *   The query this condition belongs to. If not given, the current query is
 	 *   used.
 	*/
-	public function compile(DbConnection $connection, QueryPlaceholder $queryPlaceholder);
+	public function compile(\php\db\DbConnection $connection, QueryPlaceholder $queryPlaceholder);
 	
 	/**
 	 * Check whether a condition has been previously compiled.

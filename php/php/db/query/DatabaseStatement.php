@@ -5,8 +5,9 @@
  * package php.db;
  */
 
-namespace php\db;
+namespace php\db\query;
 
+use php\db\DbConnection;
 /**
  * Default implementation of DatabaseStatementInterface.
  * @author Tony Yip
@@ -17,11 +18,11 @@ class DatabaseStatement extends \PDOStatement implements DatabaseStatementInterf
 	 *
 	 * The name $dbh is inherited from PDOStatement.
 	 *
-	 * @var DatabaseConnection
+	 * @var DbConnection
 	 */
 	public $dbh;
 	
-	protected function __construct($dbh) {
+	protected function __construct(\PDO $dbh) {
 		$this->dbh = $dbh;
 		$this->setFetchMode(\PDO::FETCH_OBJ);
 	}

@@ -3,7 +3,7 @@
  * @package php\db
  * package php.db
  */
-namespace php\db;
+namespace php\db\query;
 /**
  * General class for an abstracted DELETE operation.
  */
@@ -35,7 +35,7 @@ class DeleteQuery extends Query implements QueryConditionInterface {
 	 * @param array $options
 	 *   Array of database options.
 	 */
-	public function __construct(DatabaseConnection $connection, $table, array $options = array()) {
+	public function __construct(\php\db\DbConnection $connection, $table, array $options = array()) {
 		$options['return'] = Database::RETURN_AFFECTED;
 		parent::__construct($connection, $options);
 		$this->table = $table;
@@ -108,7 +108,7 @@ class DeleteQuery extends Query implements QueryConditionInterface {
 	/**
 	 * Implements QueryConditionInterface::compile().
 	 */
-	public function compile(DatabaseConnection $connection, QueryPlaceholderInterface $queryPlaceholder) {
+	public function compile(\php\db\DbConnection $connection, QueryPlaceholder $queryPlaceholder) {
 		return $this->condition->compile($connection, $queryPlaceholder);
 	}
 
