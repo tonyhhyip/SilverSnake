@@ -36,7 +36,7 @@ class ClassNotFoundException extends ReflectiveOperationException {
 	 * @param ex the exception that was raised while loading the class
 	 */
 	public function __construct($message = "", \php\lang\Exception $cause) {
-		parent($message, $cause);
+		parent::__construct($message, $cause);
 	}
 	
 	/**

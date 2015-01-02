@@ -170,7 +170,7 @@ class InsertQuery extends Query {
 	 *   was given multiple sets of values to insert, the return value is
 	 *   undefined. If no fields are specified, this method will do nothing and
 	 *   return NULL. That makes it safe to use in multi-insert loops.
-	 * @throws SQLException
+	 * @throws php.db.SQLException
 	 */
 	public function execute() {
 		// If validation fails, simply return NULL. Note that validation routines
@@ -251,7 +251,7 @@ class InsertQuery extends Query {
 		// Confirm that the user did not try to specify an identical
 		// field and default field.
 		if (array_intersect($this->insertFields, $this->defaultFields)) {
-			throw new SQLException('You may not specify the same field to have a value and a schema-default value.');
+			throw new \php\db\SQLException('You may not specify the same field to have a value and a schema-default value.');
 		}
 		if (!empty($this->fromQuery)) {
 			// We have to assume that the used aliases match the insert fields.
@@ -263,7 +263,7 @@ class InsertQuery extends Query {
 		} else {
 			// Don't execute query without fields.
 			if (count($this->insertFields) + count($this->defaultFields) == 0) {
-				throw new SQLException('There are no fields available to insert with.');
+				throw new \php\db\SQLException('There are no fields available to insert with.');
 			}
 		}
 		

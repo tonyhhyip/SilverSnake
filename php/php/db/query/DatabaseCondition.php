@@ -3,7 +3,8 @@
  * @package php\db
  * package php.db;
  */
-namespace php\db;
+namespace php\db\query;
+use \php\db;
 
 /**
  * Generic class for a series of conditions in a query.
@@ -117,7 +118,7 @@ class DatabaseCondition implements QueryConditionInterface, \Countable {
 	/**
 	 * Implements QueryConditionInterface::setExists().
 	 */
-	public function setExist(SelectQuery $select) {
+	public function setExists(SelectQuery $select) {
 		return $this->condition('', $select, 'EXISTS');
 	}
 
