@@ -10,10 +10,6 @@ You may pick the Apache License 2.0 or the GNU/GPL 3.
 ##Install
 Directly open call a folder SilverSnake and add it to the include path of PHP.
 
-##/php
-All the PHP version code are in this dirctory.
-[PHP](http://php.net/)
-
 ##Quick Start
 Require the init.php of SilverSnake and you can use all the package you installed.
 <code>
