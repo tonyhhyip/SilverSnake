@@ -4,28 +4,43 @@
  * @file Function and constants of the Config.
  */
 
-function SQLformatString($theValue, theType, $theDefinedValue="",$theNotDefinedValue=""){
+/**
+ * An old days function to escape sql function.
+ * Not Suggest to use.
+ * 
+ * @param mixed $value
+ *			value of the sql.
+ * @param string $type
+ *			Type of data.
+ * @param string $definedValue
+ *			value of defined value
+ * @param string $notDefineValue
+ *			Value for not define.
+ * @return string The escaped sql.
+ */
+function SQLformatString($value, $type, $definedValue = "", $notDefinedValue=""){
 	if(PHP_VERSION < 6){
-		$theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
+		$value = get_magic_quotes_gpc() ? stripslashes($value) : $value;
 	}
-	$theValue = function_exists('mysql_real_escape_string') ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
-	switch($theType){
+	$value = function_exists('mysql_real_escape_string') ? mysql_real_escape_string($value) : mysql_escape_string($value);
+	switch($type){
 		case 'search':
-			$theValue=($theValue!="")?"%" . $theValue . "%" : "NULL";
-		case "text":case "date":
-			$theValue=($theValue!="")?"'" . $theValue . "'" : "NULL";
+			$value = $value != "" ?"%" . $value . "%" : "NULL";
+		case "text":
+		case "date":
+			$value = $value != "" ? "'" . $value . "'" : "NULL";
 		break;    
 		case "long":
 		case "int":
-			$theValue=($theValue!="") ? intval($theValue) : "NULL";
+			$value = $value != "" ? intval($value) : "NULL";
 		break;
 		case "double":
-			$theValue=($theValue!="") ? doubleval($theValue) : "NULL";
+			$value = $value != "" ? doubleval($value) : "NULL";
 		break;
 		case "defined":
-			$theValue=($theValue!="") ? $theDefinedValue : $theNotDefinedValue;
+			$value = $value!="" ? $definedValue : $notDefinedValue;
 		break;
 	}
-	return $theValue;
+	return $value;
 }
 ?>
