@@ -2,10 +2,10 @@ SilverSnake
 ============
 
 The php library which can be included in elearn.pyc.edu.hk php server.
-All the code are under Apache 2.0 license. 
+All the code are under Apache 2.0 license or GNU/GPL 3. 
 
 ##LICENSE
-You may pick the Apache License 2.0 or the GUN/GPL 3.
+You may pick the Apache License 2.0 or the GNU/GPL 3.
 
 ##Install
 Directly open call a folder SilverSnake and add it to the include path of PHP.
@@ -26,11 +26,5 @@ Require the init.php of SilverSnake and you can use all the package you installe
 </pre>
 </code>
 
-##/api
-The API document of the SilverSnake.
-
-##/doc
-The developer document of the SilverSnake.
-
-##/release
+## release
 Current using at the server.
