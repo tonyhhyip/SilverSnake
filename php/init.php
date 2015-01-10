@@ -4,12 +4,13 @@
  * @file
  * Init all the data and environment.
  */
+use \php\lang;
 
 require_once(__DIR__ .  "/php/lang/ClassLoader.php");
 
 $default = array();
 
-$default['classloader'] = new \php\lang\ClassLoader();
+$default['classloader'] = new ClassLoader();
 
 $_ENV = $_ENV + $default;
 
