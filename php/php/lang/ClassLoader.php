@@ -45,6 +45,7 @@ class ClassLoader {
 		if (preg_match("/init|static/i", $class) || array_key_exists($class, $this->classes))
 			return ;
 		$class = str_replace("\\", ".", $class);
+		$src = strtr($src, '\\', DIRECTORY_SEPARATOR);
 		$this->classes[$class] = $src;
 	}
 	
