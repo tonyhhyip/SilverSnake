@@ -3,7 +3,7 @@
  * @package php.db.driver;
  */
 
-namespace php\db\driver;
+namespace php\db;
 
 use \php\db\Connection;
 

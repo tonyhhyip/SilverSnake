@@ -3,7 +3,7 @@
  * @package php.db;
  */
 
-namespace php\db\driver;
+namespace php\db;
 
 /**
  * Contract for a driver exception.
