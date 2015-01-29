@@ -179,12 +179,22 @@ class Request implements RequestInterface{
         $this->request = new ParameterBaan($request);
         $this->query = new ParameterBean($query);
         $this->attributes = new ParameterBean($attributes);
+        $this->cookies = new ParameterBean($cookies);
+        $this->files = new FileBean($files);
+
     }
 
     /**
      * {inhert}
      */
     public function getSession() {
+        return $this->session;
+    }
+
+    /**
+     * {inhert}
+     */
+    public function getBasePath() {
 
     }
 }
