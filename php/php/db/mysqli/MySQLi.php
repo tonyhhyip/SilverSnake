@@ -40,14 +40,10 @@ class MySQLi extends \mysqli{
         return new MySQLiStatement($this, $query);
     }
 
-    public function stmt_init() {
-        return $this->statementInit();
-    }
-
     /**
      * Prepare an SQL statement for execution.
      * The statement can include one or more parameter markers in the SQL statement
-     * by embedding question mark (?) characters at the appropriate positions.
+     * by embedding question mark (?) characters or :key at the appropriate positions.
      *
      * @param string $query The query, as a string.
      * @return a statement object or null if an error occurred.
@@ -88,5 +84,32 @@ class MySQLi extends \mysqli{
      */
     public function escape($query) {
         return $this->escape_string($query);
+    }
+
+    /**
+     * Returns a list of errors from the last command executed
+     *
+     * @return a list of errors
+     */
+    public function getErrorList() {
+        return $this->error_list;
+    }
+
+    /**
+     * Returns the error code for the most recent function call
+     *
+     * @return error code
+     */
+    public function getErrorCode() {
+        return $this->errno;
+    }
+
+    /**
+     * Returns a string description of the last error.
+     *
+     * @return description
+     */
+    public function getError() {
+        return $this->error;
     }
 }
