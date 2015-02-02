@@ -196,7 +196,55 @@ class Request implements RequestInterface{
     /**
      * {inherit}
      */
-    public function getBasePath() {
+    public final function getBasePath() {
+        if (null === $this->basePath)
+            $this->basePath = $this->prepareBasePath();
 
+        return $this->basePath;
+    }
+
+    /**
+     * Prepares the base path.
+     *
+     * @return string base path
+     */
+    protected function prepareBasePath() {
+        $filename = basename($this->server->getParameter('SCRIPT_FILENAME'));
+        $baseUrl = $this->getBaseUrl();
+        if (empty($baseUrl))
+            return '';
+
+        if (basename($baseUrl) === $filename)
+            return dirname($baseUrl);
+        else
+            $basePath = $baseUrl;
+
+        if ('\\' === DIRECTORY_SEPARATOR)
+            $basePath = str_replace('\\', '/', $basePath);
+
+        return rtrim($basePath, '/');
+    }
+
+    /**
+     * {inherit}
+     */
+    public final function getBaseUrl() {
+        if (null === $this->baseUrl)
+            $this->baseUrl = $this->prepareBaseUrl();
+
+        return $this->baseUrl;
+    }
+
+    /**
+     * Prepares the base URL.
+     *
+     * @return string
+     */
+    protected function prepareBaseUrl() {
+        $filename = basename($this->server->getParameter('SCRIPT_FILENAME'));
+
+        if (basename($this->server->getParameter('SCRIPT_NAME')) === $filename)
+            $baseUrl = $this->server->getParameter('SCRIPT_NAME');
+        elseif (basename($this->server->getParameter('PHP_SELF')) === $filename)
     }
 }
