@@ -139,6 +139,17 @@ class ParameterBean implements \IteratorAggregate, \Countable {
     }
 
     /**
+     * Adds parameters.
+     *
+     * @param array $parameters An array of parameters
+     *
+     * @api
+     */
+    public function addParameter(array $parameters = array()) {
+        $this->parameters = array_replace($this->parameters, $parameters);
+    }
+
+    /**
      * Removes a parameter.
      *
      * @param string $key The key

@@ -7,6 +7,8 @@
  */ 
 namespace php\servlet;
 
+use \php\lang\Exception;
+
 /**
  * Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server.
  * A cookie's value can uniquely identify a client, so cookies are commonly used for session management.
@@ -31,7 +33,7 @@ class Cookie {
 	private $name;
 	private $value;
 	private $comment = null;
-	private $domain = $_SERVER["HTTP_HOST"];
+	private $domain;
 	private $maxAge = -1;
 	private $path = "/";
 	private $secure = false;
@@ -59,6 +61,7 @@ class Cookie {
 		if (!preg_match("/[,;\s\W]*/", $name) || preg_match(("/Comment|Discard|Domain|Expires|Max-Age|Path|Secure|Version/i"), $name)) {
 			throw new Exception("cookie name is null or empty or contains any illegal characters");
 		}
+		$this->domain = $_SERVER['HTTP_HOST'];
 		$this->name = $name;
 		$this->value = $value;
 		$this->send();

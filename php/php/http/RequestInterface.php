@@ -9,11 +9,19 @@ namespace php\http;
 interface RequestInterface {
 
     /**
+     * Get the parameter of the request.
+     *
+     * @param string $name name of parameter.
+     * @return mixed value of parameter
+     */
+    public function getParameter($name);
+
+    /**
      * Gets the Session.
      *
      * @return SessionInterface|null The session
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function getSession();
 
@@ -29,7 +37,7 @@ interface RequestInterface {
      *
      * @return string The raw path (i.e. not urldecoded)
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function getBasePath();
 
@@ -43,7 +51,7 @@ interface RequestInterface {
      *
      * @return string The raw URL (i.e. not urldecoded)
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function getBaseUrl();
 
@@ -52,7 +60,7 @@ interface RequestInterface {
      *
      * @return string request scheme like HTTP or HTTPS.
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function getScheme();
 
@@ -69,7 +77,7 @@ interface RequestInterface {
      *
      * @return string
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function getPort();
 
@@ -80,7 +88,7 @@ interface RequestInterface {
      *
      * @return string
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function getHttpHost();
 
@@ -89,7 +97,7 @@ interface RequestInterface {
      *
      * @return string The raw URI (i.e. not URI decoded)
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function getRequestUri();
 
@@ -98,9 +106,9 @@ interface RequestInterface {
      *
      * @return string A normalized URI (URL) for the Request
      *
-     * @see getQueryString()
+     * @see #getQueryString()
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function getUri();
 
@@ -112,7 +120,7 @@ interface RequestInterface {
      *
      * @return string|null A normalized query string for the Request
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function getQueryString();
 
@@ -130,7 +138,7 @@ interface RequestInterface {
      *
      * @return bool
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function isSecure();
 
@@ -149,7 +157,7 @@ interface RequestInterface {
      *
      * @throws \UnexpectedValueException when the host name is invalid
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function getHost();
 
@@ -166,9 +174,9 @@ interface RequestInterface {
      *
      * @return string The request method
      *
-     * @api
+     * @version 0.0.1-dev
      *
-     * @see getRealMethod()
+     * @see #getRealMethod()
      */
     public function getMethod();
 
@@ -176,6 +184,7 @@ interface RequestInterface {
      * Get the locale.
      *
      * @return string
+     * @version 0.0.1-dev
      */
     public function getLocale();
 
@@ -183,6 +192,7 @@ interface RequestInterface {
      * Get the default locale.
      *
      * @return string
+     * @version 0.0.1-dev
      */
     public function getDefaultLocale();
 
@@ -191,7 +201,7 @@ interface RequestInterface {
      *
      * @param string $locale
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function setLocale($locale);
 
@@ -202,7 +212,7 @@ interface RequestInterface {
      *
      * @return string|null The preferred locale
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function getPreferredLanguage(array $locales = null);
 
@@ -212,7 +222,7 @@ interface RequestInterface {
      *
      * @return array Languages ordered in the user browser preferences
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function getLanguages();
 
@@ -221,7 +231,7 @@ interface RequestInterface {
      *
      * @return array List of content types in preferable order
      *
-     * @api
+     * @version 0.0.1-dev
      */
     public function getAcceptableContentTypes();
 
@@ -229,6 +239,25 @@ interface RequestInterface {
      * Gets a list of encodings acceptable by the client browser.
      *
      * @return array List of encodings in preferable order
+     * @version 0.0.1-dev
      */
     public function getEncodings();
+
+    /**
+     * Returns the path being requested relative to the executed script.
+     *
+     * The path info always starts with a /.
+     *
+     * Suppose this request is instantiated from /mysite on localhost:
+     *
+     *  * http://localhost/mysite              returns an empty string
+     *  * http://localhost/mysite/about        returns '/about'
+     *  * http://localhost/mysite/enco%20ded   returns '/enco%20ded'
+     *  * http://localhost/mysite/about?var=1  returns '/about'
+     *
+     * @return string The raw path (i.e. not urldecoded)
+     *
+     * @version 0.0.1-dev
+     */
+    public function getPathInfo();
 }
