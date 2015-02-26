@@ -1,0 +1,45 @@
+{
+  "name": "tonyhhyip/SilverSnake",
+  "description": "SilverSnake Framework",
+  "minimum-stability": "stable",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/tonyhhyip/SilverSnake",
+  "keywords":[
+    "framework",
+    "library"
+  ],
+  "authors": [
+    {
+      "name": "Tony Yip",
+      "email": "tony@opensource.hk",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+      "email": "tony@opensource.hk",
+      "source": "https://github.com/tonyhhyip/SilverSnake",
+      "issue": "https://github.com/tonyhhyip/SilverSnake/issues/new"
+  },
+  "require": {
+    "php": ">=5.3.1",
+    "symfony/http-foundation": "dev-master",
+    "symfony/routing": "dev-master",
+    "doctrine/dbal": "dev-master",
+    "twig/twig": "dev-master",
+    "monolog/monolog": "dev-master",
+    "symfony/config": "dev-master",
+    "symfony/yaml": "dev-master",
+    "symfony/filesystem": "dev-master"
+  },
+  "autoload": {
+    "psr-0": {
+      "SilverSnake\\": ["src/"],
+      "php\\": ["src/"]
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  }
+}
