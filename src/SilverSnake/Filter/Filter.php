@@ -23,7 +23,7 @@ interface Filter {
      *
      * @param FilterConfig $config
      */
-    public function init(FilterConfig $config);
+    public function init();
 
     /**
      * The doFilter method of the Filter is called by the container each time a request/response pair is passed through the chain
