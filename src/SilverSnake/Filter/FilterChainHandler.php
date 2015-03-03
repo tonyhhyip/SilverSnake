@@ -35,7 +35,7 @@ class FilterChainHandler implements FilterChain {
         if (count($this->filterQueue)) {
             $filter = array_shift($this->filterQueue);
             if ($filter instanceof Filter) {
-                $filter->init();
+                $filter->init($this->controller->getControllerContext());
                 $filter->doFilter($request, $response, $this);
                 $filter->destroy();
             }

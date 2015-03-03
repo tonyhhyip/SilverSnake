@@ -1,9 +1,8 @@
 <?php
 
-namespace SilverSnake\Http;
+namespace SilverSnake\Filter;
 
-use SilverSnake\Http\Filter\FilterChain;
-
+use SilverSnake\Controller\ControllerContext;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,9 +20,9 @@ interface Filter {
      *   1. Throws an Exception
      *   2. Does not return within a time period defined by the web container
      *
-     * @param FilterConfig $config
+     * @param ControllerContext $config
      */
-    public function init();
+    public function init(ControllerContext $config);
 
     /**
      * The doFilter method of the Filter is called by the container each time a request/response pair is passed through the chain

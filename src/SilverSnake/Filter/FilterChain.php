@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverSnake\Http\Filter;
+namespace SilverSnake\Filter;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
