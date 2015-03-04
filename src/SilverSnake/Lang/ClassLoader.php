@@ -1,9 +1,5 @@
 <?php
-/**
- * @package \php\lang
- * package php.lang;
- */
-namespace php\lang;
+namespace SilverSnake\Lang;
 
 /**
  * @file
@@ -27,7 +23,7 @@ class ClassLoader {
 	 * If its parent is null, the constructor will auto look for the first autoload function as its parent. 
 	 * @param ClassLoader $parent The parent ClassLoader.
 	 */
-	public function __construct(\php\lang\ClassLoader $parent = null) {
+	public function __construct(ClassLoader $parent = null) {
 		if ($parent instanceof ClassLoader) {
 			$this->parent = $parent;
 		} else if (function_exists('__autoload')) {

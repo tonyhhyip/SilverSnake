@@ -1,9 +1,6 @@
 <?php
-/**
- * @package \php\lang
- * package php.lang;
- */
-namespace php\lang;
+
+namespace SilverSnake\Lang;
 
 /**
  * Thrown when an application tries to load in a class through its
@@ -32,10 +29,10 @@ class ClassNotFoundException extends ReflectiveOperationException {
 	 * specified detail message and optional exception that was
 	 * raised while loading the class.
 	 *
-	 * @param s the detail message
-	 * @param ex the exception that was raised while loading the class
+	 * @param string $message the detail message
+	 * @param Exception $cause ex the exception that was raised while loading the class
 	 */
-	public function __construct($message = "", \php\lang\Exception $cause) {
+	public function __construct($message = "", Exception $cause = null) {
 		parent::__construct($message, $cause);
 	}
 	

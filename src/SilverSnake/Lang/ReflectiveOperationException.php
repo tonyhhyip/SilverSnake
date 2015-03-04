@@ -1,9 +1,6 @@
 <?php
-/**
- * @package \php\lang
- * package php.lang;
- */
-namespace php\lang;
+
+namespace SilverSnake\Lang;
 
 /**
  * @file
@@ -16,7 +13,7 @@ namespace php\lang;
  *
  * @see LinkageError
  */
-class ReflectiveOperationException extends \php\lang\Exception {
+class ReflectiveOperationException extends Exception {
 	/**
 	 * Constructs a new exception with the specified detail message
 	 * and cause.
@@ -32,7 +29,7 @@ class ReflectiveOperationException extends \php\lang\Exception {
 	 *         permitted, and indicates that the cause is nonexistent or
 	 *         unknown.)
 	 */
-	public function __construct($message = "", \php\lang\Exception $cause = null) {
+	public function __construct($message = "", Exception $cause = null) {
 		parent::__construct($message, $cause);
 	}
 }
