@@ -7,11 +7,15 @@ namespace SilverSnake {
 
     $loader = new ClassLoader();
     $app = dirname(__DIR__);
-    $loader->addPsr4('SilverSnake', $app . '/lib');
-    $loader->addPsr4('SilverSnake\Test', $app . '/test', true);
+    $loader->setPsr4('SilverSnake\\', array($app . '/lib'));
+    $loader->setPsr4('SilverSnake\\Test\\', array($app . '/test'));
 
-    $config = parse_ini_file($app . '/config/app.ini');
-    $loader->addPsr4($config['prefix'], $app . $config['dist']);
+    $config = parse_ini_file($app . '/config/app.ini', true);
+    if (array_key_exists('autoload', $config)) {
+        $config = $config['autoload'];
+        $prefix = str_replace('::', '\\', $config['prefix'] . '::');
+        $loader->setPsr4($prefix, $app . $config['dist']);
+    }
 
     $loader->register();
 }
