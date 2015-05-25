@@ -30,6 +30,9 @@ class ViewHandler
      */
     private $param = array();
 
+    /**
+     * @throws \Twig_Error_Loader
+     */
     public function __construct()
     {
         $this->loader = new Twig_Loader_Chain();
@@ -40,6 +43,9 @@ class ViewHandler
         $this->loader->addLoader($files);
     }
 
+    /**
+     * @param string $path
+     */
     public function setTemplate($path)
     {
         $path .= '.twig';
@@ -48,19 +54,29 @@ class ViewHandler
                 'cache' => __DIR__ . '/../../app/cache'
             ));
         $this->template = $this->env->loadTemplate($path);
-        return $this;
     }
 
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
     public function setParameter($name, $value)
     {
         $this->param[$name] = $value;
     }
 
+    /**
+     * @param string $name
+     */
     public function removeParameter($name)
     {
         unset($this->param[$name]);
     }
 
+    /**
+     * @return string
+     * @throws \Exception
+     */
     public function generate()
     {
         return $this->template->render($this->param);
